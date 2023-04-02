@@ -1,0 +1,72 @@
+[
+    {
+        "logo": "/img/bet365.png",
+        "play_url": "https://www.bet365.com/",
+        "brand_id": "bet365",
+        "terms_and_conditions": "https://www.bet365.com/terms-and-conditions",
+        "features": [
+            "Life betting options",
+            "Frequent promotions",
+            "New player bonus"
+        ],
+        "rating": 4,
+        "bonus": "100% Deposit bonus up to $200",
+        "order": 5
+    },
+    {
+        "logo": "/img/unibet.png",
+        "play_url": "https://www.unibet.com/",
+        "brand_id": "unibet",
+        "terms_and_conditions": "https://www.betmgm.com/terms-and-conditions",
+        "features": [
+            "Several payment methods",
+            "Free & real money games",
+            "$10 no deposit bonus"
+        ],
+        "rating": 5,
+        "bonus": "Free $10 + 100% deposit bonus up to $500",
+        "order": 4
+    },
+    {
+        "logo": "/img/betmgm.png",
+        "play_url": "https://www.betmgm.com/",
+        "brand_id": "betmgm",
+        "terms_and_conditions": "https://www.betmgm.com/terms-and-conditions",
+        "features": [
+            "Casino & sports betting",
+            "Big slot selection",
+            "Daily promotions and offers"
+        ],
+        "rating": 5,
+        "bonus": "Free $25 bonus and 100% deposit up to $1000",
+        "order": 2
+    },
+    {
+        "logo": "/img/partycasino.png",
+        "play_url": "https://casino.partycasino.com/",
+        "brand_id": "partycasino",
+        "terms_and_conditions": "https://www.partycasino.com/en/terms-and-conditions",
+        "features": [
+            "Easy cash back options",
+            "Good payment options",
+            "Exclusive games"
+        ],
+        "rating": 4,
+        "bonus": "100% deposit bonus up to $500",
+        "order": 1
+    },
+    {
+        "logo": "/img/borgataonline.png",
+        "play_url": "https://www.borgataonline.com/",
+        "brand_id": "borgataonline",
+        "terms_and_conditions": "https://www.borgataonline.com/terms-and-conditions",
+        "features": [
+            "Royalty program available",
+            "Great tie-in promotions",
+            "$20 no deposit bonus"
+        ],
+        "rating": 5,
+        "bonus": "100% deposit bonus up to $600",
+        "order": 3
+    }
+]
