@@ -16,6 +16,7 @@ import {
 	Droppable,
 	Draggable,
 } from "react-beautiful-dnd";
+import { useNavigate } from 'react-router-dom';
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 	userSelect: "none",
@@ -30,6 +31,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 const AdminArea: React.FC = () => {
 	const dispatch = useDispatch();
 	const casinos = useSelector((state: RootState) => state.casino.data);
+	const navigate = useNavigate();
 
 	const onDragEnd = (result: any) => {
 		if (!result.destination) {
@@ -41,6 +43,13 @@ const AdminArea: React.FC = () => {
 		newCasinos.splice(result.destination.index, 0, removed);
 
 		dispatch(updateCasinoOrder(newCasinos));
+	};
+
+	const handleSave = () => {
+		// save the order of the casinos
+		dispatch(updateCasinoOrder(casinos));
+		// navigate to the main page
+		navigate('/');
 	};
 
 	return (
@@ -83,7 +92,7 @@ const AdminArea: React.FC = () => {
 						</DragDropContext>
 					</Grid>
 					<Grid item xs={12}>
-						<Button variant="contained" color="primary">
+						<Button variant="contained" color="primary" onClick={handleSave}>
 							Save
 						</Button>
 					</Grid>
