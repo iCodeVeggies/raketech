@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import {
 	Box,
 	Button,
@@ -15,17 +15,15 @@ import {
 	DragDropContext,
 	Droppable,
 	Draggable,
-	DraggingStyle,
-	NotDraggingStyle,
 } from "react-beautiful-dnd";
 
-const getItemStyle = (
-	isDragging: boolean,
-	draggableStyle: DraggingStyle | NotDraggingStyle | undefined
-): CSSProperties => ({
+const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 	userSelect: "none",
+	padding: "16px",
+	margin: "0 0 8px 0",
 	background: isDragging ? "#f0f0f0" : "white",
-	cursor: isDragging ? "grabbing" : "grab",
+	border: "1px solid #ccc",
+	borderRadius: "2px",
 	...draggableStyle,
 });
 
