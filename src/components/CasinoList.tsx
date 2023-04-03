@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import {
 	Button,
 	Card,
@@ -13,23 +13,11 @@ import {
 	Typography,
 } from "@mui/material";
 import { Check, Star, StarBorder } from "@mui/icons-material";
-import { AppDispatch, RootState } from "../redux/store";
-import { setCasinos } from "../redux/casinoSlice";
+import { RootState } from "../redux/store";
 import { Link as RouterLink } from "react-router-dom";
 
 const CasinoList: React.FC = () => {
-	const [loading, setLoading] = useState(true);
-	const dispatch: AppDispatch = useDispatch();
 	const casinos = useSelector((state: RootState) => state.casino.data);
-
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_BASE_URL}/api/casinos`)
-			.then((response) => response.json())
-			.then((data) => {
-				dispatch(setCasinos(data));
-				setLoading(false);
-			});
-	}, [dispatch]);
 
 	// Function to render stars based on the rating
 	const renderStars = (rating: number) => {
@@ -65,9 +53,8 @@ const CasinoList: React.FC = () => {
 				</Grid>
 			</Grid>
 			{/* Casino items */}
-			{!loading && casinos.length ? (
+			{casinos && casinos.length ? (
 				[...casinos] // copy the array to prevent modifying the original state data in a mutable way
-					.sort((a, b) => a.order - b.order) // Sort by order
 					.map((casino) => (
 						<Grid item xs={12} key={casino.brand_id}>
 							<Card style={{ marginBottom: 16 }}>

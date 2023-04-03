@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { ICasino } from "../types";
 
 interface CasinoState {
@@ -9,19 +9,16 @@ const initialState: CasinoState = {
 	data: [],
 };
 
-export const casinoSlice = createSlice({
-	name: "casino",
+  export const casinoSlice = createSlice({
+	name: "casinos",
 	initialState,
 	reducers: {
-		setCasinos: (state, action: PayloadAction<Array<ICasino>>) => {
-			state.data = action.payload;
-		},
-		updateCasinoOrder: (state, action: PayloadAction<Array<ICasino>>) => {
-			state.data = action.payload;
-		},
-	},
-});
-
-export const { setCasinos, updateCasinoOrder } = casinoSlice.actions;
-
-export default casinoSlice.reducer;
+	  setCasinos: (state, action) => {
+		state.data = action.payload;
+	  },
+	}
+  });
+  
+  export const { setCasinos } = casinoSlice.actions;
+  
+  export default casinoSlice.reducer;

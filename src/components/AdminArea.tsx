@@ -9,14 +9,10 @@ import {
 	ListItem,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { updateCasinoOrder } from "../redux/casinoSlice";
-import {
-	DragDropContext,
-	Droppable,
-	Draggable,
-} from "react-beautiful-dnd";
-import { useNavigate } from 'react-router-dom';
+import { AppDispatch, RootState } from "../redux/store";
+import { setCasinos } from "../redux/casinoSlice";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useNavigate } from "react-router-dom";
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 	userSelect: "none",
@@ -29,7 +25,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 });
 
 const AdminArea: React.FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const casinos = useSelector((state: RootState) => state.casino.data);
 	const navigate = useNavigate();
 
@@ -41,15 +37,12 @@ const AdminArea: React.FC = () => {
 		const newCasinos = Array.from(casinos);
 		const [removed] = newCasinos.splice(result.source.index, 1);
 		newCasinos.splice(result.destination.index, 0, removed);
-
-		dispatch(updateCasinoOrder(newCasinos));
+		dispatch(setCasinos(newCasinos));
 	};
 
-	const handleSave = () => {
-		// save the order of the casinos
-		dispatch(updateCasinoOrder(casinos));
+	const goHome = () => {
 		// navigate to the main page
-		navigate('/');
+		navigate("/");
 	};
 
 	return (
@@ -63,7 +56,10 @@ const AdminArea: React.FC = () => {
 						<DragDropContext onDragEnd={onDragEnd}>
 							<Droppable droppableId="casinos">
 								{(provided) => (
-									<List ref={provided.innerRef} {...provided.droppableProps}>
+									<List
+										{...(provided.droppableProps as any)}
+										ref={provided.innerRef}
+									>
 										{casinos.map((casino, index) => (
 											<Draggable
 												key={casino.brand_id}
@@ -72,9 +68,9 @@ const AdminArea: React.FC = () => {
 											>
 												{(provided, snapshot) => (
 													<ListItem
-														ref={provided.innerRef}
 														{...provided.draggableProps}
 														{...provided.dragHandleProps}
+														ref={provided.innerRef}
 														style={getItemStyle(
 															snapshot.isDragging,
 															provided.draggableProps.style
@@ -92,8 +88,8 @@ const AdminArea: React.FC = () => {
 						</DragDropContext>
 					</Grid>
 					<Grid item xs={12}>
-						<Button variant="contained" color="primary" onClick={handleSave}>
-							Save
+						<Button variant="contained" color="primary" onClick={goHome}>
+							Home
 						</Button>
 					</Grid>
 				</Grid>
