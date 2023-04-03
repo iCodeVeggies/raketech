@@ -15,6 +15,7 @@ import {
 import { Check, Star, StarBorder } from "@mui/icons-material";
 import { AppDispatch, RootState } from "../redux/store";
 import { setCasinos } from "../redux/casinoSlice";
+import { Link as RouterLink } from "react-router-dom";
 
 const CasinoList: React.FC = () => {
 	const [loading, setLoading] = useState(true);
@@ -23,12 +24,12 @@ const CasinoList: React.FC = () => {
 
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_API_BASE_URL}/api/casinos`)
-		  .then((response) => response.json())
-		  .then((data) => {
-			dispatch(setCasinos(data));
-			setLoading(false);
-		  });
-	  }, [dispatch]);
+			.then((response) => response.json())
+			.then((data) => {
+				dispatch(setCasinos(data));
+				setLoading(false);
+			});
+	}, [dispatch]);
 
 	// Function to render stars based on the rating
 	const renderStars = (rating: number) => {
@@ -181,6 +182,18 @@ const CasinoList: React.FC = () => {
 					<CircularProgress />
 				</Grid>
 			)}
+			<Grid container justifyContent="center">
+				<div style={{ marginTop: "2rem" }}>
+					<Button
+						component={RouterLink}
+						to="/admin"
+						variant="contained"
+						color="primary"
+					>
+						Go to Admin Area
+					</Button>
+				</div>
+			</Grid>
 		</Grid>
 	);
 };
