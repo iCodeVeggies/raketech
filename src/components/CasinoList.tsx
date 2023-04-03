@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
 	Button,
 	Card,
@@ -12,35 +13,22 @@ import {
 	Typography,
 } from "@mui/material";
 import { Check, Star, StarBorder } from "@mui/icons-material";
-
-interface ICasino {
-	brand_id: string;
-	logo: string;
-	rating: number;
-	bonus: string;
-	features: string[];
-	play_url: string;
-	terms_and_conditions: string;
-	order: number;
-}
+import { AppDispatch, RootState } from "../redux/store";
+import { setCasinos } from "../redux/casinoSlice";
 
 const CasinoList: React.FC = () => {
-	const [casinos, setCasinos] = useState<Array<ICasino>>([]);
 	const [loading, setLoading] = useState(true);
+	const dispatch: AppDispatch = useDispatch();
+	const casinos = useSelector((state: RootState) => state.casino.data);
 
 	useEffect(() => {
-		// Fetch data from the API endpoint
 		fetch(`${process.env.REACT_APP_API_BASE_URL}/api/casinos`)
-			.then((response) => response.json()) // Parse the response as JSON
-			.then((data) => {
-				setCasinos(data);
-				setLoading(false);
-			});
-	}, []); // Run at component initialisation
-
-	useEffect(() => {
-		console.log("casinos", casinos);
-	}, [casinos]);
+		  .then((response) => response.json())
+		  .then((data) => {
+			dispatch(setCasinos(data));
+			setLoading(false);
+		  });
+	  }, [dispatch]);
 
 	// Function to render stars based on the rating
 	const renderStars = (rating: number) => {
@@ -77,7 +65,7 @@ const CasinoList: React.FC = () => {
 			</Grid>
 			{/* Casino items */}
 			{!loading && casinos.length ? (
-				casinos
+				[...casinos] // copy the array to prevent modifying the original state data in a mutable way
 					.sort((a, b) => a.order - b.order) // Sort by order
 					.map((casino) => (
 						<Grid item xs={12} key={casino.brand_id}>
